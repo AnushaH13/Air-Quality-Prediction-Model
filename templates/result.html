@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AQI Prediction Result</title>
+    <style>
+        /* Full page background image */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://www.shutterstock.com/image-vector/air-quality-index-aqi-measurement-600nw-2418628893.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container with blur & background overlay for readability */
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 2.2rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 12px 0;
+        }
+
+        img.aqi-image {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+        }
+
+        a {
+            display: inline-block;
+            margin: 20px 15px 0;
+            color: #ffd700;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>AQI Prediction Result</h2>
+        <p><strong>Predicted AQI Value:</strong> {{ aqi }}</p>
+        <p><strong>AQI Category:</strong> {{ aqi_bucket }}</p>
+
+      
+
+        <br>
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+</body>
+</html>

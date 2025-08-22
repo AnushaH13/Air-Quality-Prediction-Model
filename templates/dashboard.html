@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AQI Prediction Dashboard</title>
+    <style>
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: url('https://www.shutterstock.com/image-vector/air-quality-meter-health-measurement-260nw-2262043575.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            color: #222;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            color: #e63946;
+            font-weight: 600;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1.5px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #1d3557;
+            box-shadow: 0 0 6px #457b9d;
+        }
+
+        button {
+            grid-column: span 2;
+            padding: 12px;
+            background: linear-gradient(90deg, #1d3557, #457b9d);
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(70, 123, 157, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(70, 123, 157, 0.75);
+        }
+
+        .logout-link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            color: #1d3557;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logout-link:hover {
+            color: #457b9d;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hello, {{ session['username'] }}!</h2>
+        <h2>Enter pollutant values to predict AQI</h2>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+              {% for msg in messages %}
+                <li>{{ msg }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div>
+                <label for="pm25">PM2.5:</label>
+                <input type="number" step="any" id="pm25" name="PM2.5" required>
+            </div>
+            <div>
+                <label for="pm10">PM10:</label>
+                <input type="number" step="any" id="pm10" name="PM10" required>
+            </div>
+            <div>
+                <label for="no">NO:</label>
+                <input type="number" step="any" id="no" name="NO" required>
+            </div>
+            <div>
+                <label for="no2">NO2:</label>
+                <input type="number" step="any" id="no2" name="NO2" required>
+            </div>
+            <div>
+                <label for="nox">NOx:</label>
+                <input type="number" step="any" id="nox" name="NOx" required>
+            </div>
+            <div>
+                <label for="nh3">NH3:</label>
+                <input type="number" step="any" id="nh3" name="NH3" required>
+            </div>
+            <div>
+                <label for="co">CO:</label>
+                <input type="number" step="any" id="co" name="CO" required>
+            </div>
+            <div>
+                <label for="so2">SO2:</label>
+                <input type="number" step="any" id="so2" name="SO2" required>
+            </div>
+            <div>
+                <label for="o3">O3:</label>
+                <input type="number" step="any" id="o3" name="O3" required>
+            </div>
+            <div>
+                <label for="benzene">Benzene:</label>
+                <input type="number" step="any" id="benzene" name="Benzene" required>
+            </div>
+            <div>
+                <label for="toluene">Toluene:</label>
+                <input type="number" step="any" id="toluene" name="Toluene" required>
+            </div>
+            <div>
+                <label for="xylene">Xylene:</label>
+                <input type="number" step="any" id="xylene" name="Xylene" required>
+            </div>
+            <button type="submit">Predict AQI</button>
+        </form>
+
+        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    </div>
+</body>
+</html>
